@@ -34,7 +34,7 @@ const BugSeveritiesEnum = new GraphQLEnumType({
         Low: { value: 'Low' },
         Medium: { value: 'Medium' },
         High: { value: 'High' },
-        Very_High: { value: 'Very_High' },
+        Very_High: { value: 'Very High' },
         Extreme: { value: 'Extreme' },
         Code_Red: { value: 'Code_Red' }
     }
