@@ -18,27 +18,24 @@ const BugType = new GraphQLObjectType({
         id: { type: GraphQLID },
         title: { type: GraphQLString },
         description: { type: GraphQLString },
-        severity: {
-            type: BugSeveritiesEnum,
-            resolve: bug => bug.severity // Resolve the enum value from the bug data
-        },
+        severity: {type: GraphQLString},
         patched: { type: GraphQLBoolean },
         vulnerableTech: { type: GraphQLList(GraphQLString) },
         comments: {type: new GraphQLList(GraphQLString)}
     })
 });
 
-const BugSeveritiesEnum = new GraphQLEnumType({
-    name: 'BugSeverities',
-    values: {
-        Low: { value: 'Low' },
-        Medium: { value: 'Medium' },
-        High: { value: 'High' },
-        Very_High: { value: 'Very High' },
-        Extreme: { value: 'Extreme' },
-        Code_Red: { value: 'Code_Red' }
-    }
-});
+//const BugSeveritiesEnum = new GraphQLEnumType({
+    //name: 'BugSeverities',
+    //values: {
+        //Low: { value: 'Low' },
+        //Medium: { value: 'Medium' },
+        //High: { value: 'High' },
+        //Very_High: { value: 'Very_High' },
+        //Extreme: { value: 'Extreme' },
+        //Code_Red: { value: 'Code_Red' }
+    //}
+//});
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -80,7 +77,7 @@ const RootQuery = new GraphQLObjectType({
         bugsBySeverity: {
             type: new GraphQLList(BugType),
             args: {
-                bugSeverity: {type: BugSeveritiesEnum}
+                bugSeverity: {type: GraphQLString}
             },
             resolve(parent, args){
                 var newBugs = [];
@@ -118,7 +115,7 @@ const Mutation = new GraphQLObjectType({
             args: {
                 title: { type: GraphQLNonNull(GraphQLString) },
                 description: { type: GraphQLNonNull(GraphQLString) },
-                severity: { type: GraphQLNonNull(BugSeveritiesEnum) },
+                severity: { type: GraphQLNonNull(GraphQLString) },
                 patched: { type: GraphQLNonNull(GraphQLBoolean) },
                 vulnerableTech: { type: GraphQLList(GraphQLString) },
                 comments: {type: new GraphQLList(GraphQLString)}
@@ -168,7 +165,7 @@ const Mutation = new GraphQLObjectType({
                 id: { type: GraphQLID },
                 title: { type: GraphQLString },
                 description: { type: GraphQLString },
-                severity: { type: BugSeveritiesEnum },
+                severity: { type: GraphQLString },
                 patched: { type: GraphQLBoolean },
                 vulnerableTech: { type: new GraphQLList(GraphQLString) },
                 comments: {type: new GraphQLList(GraphQLString)}
