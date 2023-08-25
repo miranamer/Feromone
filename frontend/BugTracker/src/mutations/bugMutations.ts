@@ -26,4 +26,13 @@ const PATCH_BUG = gql`
     }
 `
 
-export {DELETE_BUG, ADD_BUG, PATCH_BUG}
+const ADD_COMMENT = gql`
+    mutation addComment($id: ID!, $comment: String!){
+        addComment(id: $id, comment: $comment){
+            id
+            comments
+        }
+    }
+`
+
+export {DELETE_BUG, ADD_BUG, PATCH_BUG, ADD_COMMENT}

@@ -9,6 +9,8 @@ const GET_BUGS = gql`
       description
       severity
       patched
+      comments
+      vulnerableTech
     }
   }
 `
@@ -21,6 +23,8 @@ query searchBugs($query: String!){
     severity
     description
     patched
+    comments
+    vulnerableTech
   }
 }`
 
@@ -32,6 +36,8 @@ const GET_PATCHED_BUGS = gql`
       description
       severity
       patched
+      comments
+      vulnerableTech
     }
   }
 `;
@@ -45,6 +51,8 @@ const GET_BUGS_BY_SEVERITY = gql`
       description
       severity
       patched
+      comments
+      vulnerableTech
     }
   }
 `;
@@ -57,6 +65,8 @@ const GET_BUG_BY_ID = gql`
       description
       severity
       patched
+      comments
+      vulnerableTech
     }
   }
 `

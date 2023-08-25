@@ -20,6 +20,8 @@ import { useMutation } from '@apollo/client'
 
 const AddBug = ({isOpen, onClose, onOpen}) => {
 
+    //! ADD OPTION TO ADD VULN TECH
+
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [patched, setPatched] = useState<boolean>(true);
