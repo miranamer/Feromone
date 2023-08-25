@@ -55,10 +55,10 @@ const RootQuery = new GraphQLObjectType({
         },
 
         bugFromID: {
-            type: BugType,
+            type: new GraphQLList(BugType),
             args: {id: {type: GraphQLID}},
             resolve(parent, args){
-                return bugs.find(bug => bug.id == args.id);
+                return [bugs.find(bug => bug.id == args.id)];
             }
         },
 

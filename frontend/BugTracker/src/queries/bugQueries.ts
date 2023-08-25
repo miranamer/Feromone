@@ -49,4 +49,16 @@ const GET_BUGS_BY_SEVERITY = gql`
   }
 `;
 
-export {GET_BUGS, SEARCH_BUGS, GET_PATCHED_BUGS, GET_BUGS_BY_SEVERITY};
+const GET_BUG_BY_ID = gql`
+  query getBugById($id: ID!){
+    bugFromID(id: $id){
+      id
+      title
+      description
+      severity
+      patched
+    }
+  }
+`
+
+export {GET_BUGS, SEARCH_BUGS, GET_PATCHED_BUGS, GET_BUGS_BY_SEVERITY, GET_BUG_BY_ID};

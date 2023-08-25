@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { ChakraProvider, Spinner, Badge, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, } from '@chakra-ui/react'
 import BugRow from './BugRow'
-import { GET_BUGS, SEARCH_BUGS, GET_PATCHED_BUGS, GET_BUGS_BY_SEVERITY } from '../queries/bugQueries'
+import { GET_BUGS, SEARCH_BUGS, GET_PATCHED_BUGS, GET_BUGS_BY_SEVERITY, GET_BUG_BY_ID } from '../queries/bugQueries'
 import { DocumentNode, useQuery } from '@apollo/client'
 
 interface BugTableProps{
@@ -26,7 +26,8 @@ const BugTable = (props:BugTableProps) => {
   
   useEffect(() => {
     if (props.search !== '') {
-      setQuery(SEARCH_BUGS);
+      const isnum = /^\d+$/.test(props.search);
+      isnum ? setQuery(GET_BUG_BY_ID) : setQuery(SEARCH_BUGS);
     } else if (props.selectedValue === 'patched') {
       setQuery(GET_PATCHED_BUGS);
     } else if (props.selectedValue === 'severity') {
@@ -43,7 +44,8 @@ const BugTable = (props:BugTableProps) => {
   {
     variables: {
       query: props.search,
-      bugSeverity: props.nestedValue
+      bugSeverity: props.nestedValue,
+      id: props.search
     }
   }
 );
@@ -51,33 +53,35 @@ const BugTable = (props:BugTableProps) => {
   if(loading) return <Spinner />
   if(error) return <p>ERROR!</p>
 
-  const dataVarMap = {
-    GET_BUGS: data.allBugs,
-    SEARCH_BUGS: data.searchBugs,
-    GET_PATCHED_BUGS: data.getPatchedBugs,
-    GET_BUGS_BY_SEVERITY: data.getBugsBySeverity
-  }
-
   let dataVar;
 
   switch(query){
     case(GET_BUGS):
       dataVar = data.allBugs;
       break;
+    case(GET_BUG_BY_ID):  
+      if(data.bugFromID[0] === null){
+        dataVar = data.allBugs;
+      }
+      else{
+        dataVar = data.bugFromID;
+      }
+      break;
     case(SEARCH_BUGS):
       dataVar = data.searchBugs;
       break;
     case(GET_PATCHED_BUGS):
-      dataVar = data.getPatchedBugs;
+      dataVar = data.allPatchedBugs;
       break;
     case(GET_BUGS_BY_SEVERITY):
       dataVar = data.bugsBySeverity;
       break;
     default:
-      return <h1>Severity Error</h1>
+      return <h1>Order By Error</h1>
   }
 
-  console.log(props.selectedValue, data, dataVar);
+  console.log(data);
+  //! if search is only number, then find by id query should run else just search query
 
   return (
     <>
