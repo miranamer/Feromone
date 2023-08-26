@@ -1,9 +1,10 @@
-import React from 'react'
+import {useState} from 'react'
 import {Text, Badge, Box, Divider, Button, useDisclosure} from '@chakra-ui/react'
 import Vulnerable from '../components/Vulnerable'
 import Comment from '../components/Comment'
 import { useLocation } from 'react-router-dom'
 import CommentModal from '../components/CommentModal'
+import { useQuery } from '@apollo/client'
 
 function ViewBug() {
 
@@ -11,7 +12,7 @@ function ViewBug() {
 
     console.log('HERE -> ', location.state);
     
-    const {
+    let {
       id,
       title,
       description,
@@ -20,6 +21,13 @@ function ViewBug() {
       vulnerableTech,
       comments,
     } = location.state.data;
+
+    const [bugData, setBugData] = useState(location.state.data);
+
+    const updateComments = (newComment) => {
+        comments.push(newComment);
+    };
+
 
     const severityColorMap = {
         'Low': 'green',
@@ -58,11 +66,11 @@ function ViewBug() {
             <div className="flex flex-col gap-2 mt-10">
                 <h2 className='text-xl'>Vulnerable Technologies:</h2>
                     <div className="flex gap-2 mt-2">
-                    {vulnerableTech && vulnerableTech.map((tech) => {
+                    {vulnerableTech.length > 0 ? vulnerableTech.map((tech) => {
                         return (
                             <Vulnerable name={tech} />
                         )
-                    })}
+                    }): <h1>N/A</h1>}
                 </div>
             </div>
 
@@ -79,7 +87,7 @@ function ViewBug() {
                 })}
             </div>
         </div>
-        <CommentModal id={id} isOpen={isOpen} onClose={onClose} />
+        <CommentModal id={id} isOpen={isOpen} onClose={onClose} updateComments={updateComments} />
     </>
   )
 }

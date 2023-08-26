@@ -10,10 +10,10 @@ import {Text, Badge, Box, Divider, Button,  Modal,
     Textarea} from '@chakra-ui/react'
 import { ADD_COMMENT } from '../mutations/bugMutations'
 import { GET_BUGS } from '../queries/bugQueries'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 
-const CommentModal = ({isOpen, onClose, id}) => {
+const CommentModal = ({isOpen, onClose, id, updateComments}) => {
 
     const [comment, setComment] = useState<string>('');
 
@@ -22,7 +22,11 @@ const CommentModal = ({isOpen, onClose, id}) => {
             id: id,
             comment
         },
-        refetchQueries: [{query: GET_BUGS}]
+        
+        onCompleted: (data) => {
+          updateComments(comment);
+          onClose();
+      }
     })
 
   return (

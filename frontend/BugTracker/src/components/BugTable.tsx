@@ -45,7 +45,8 @@ const BugTable = (props:BugTableProps) => {
     variables: {
       query: props.search,
       bugSeverity: props.nestedValue,
-      id: props.search
+      id: props.search,
+      //sortBySeverity: true
     }
   }
 );

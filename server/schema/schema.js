@@ -42,14 +42,9 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         allBugs: {
             type: new GraphQLList(BugType),
-            args: {
-                sortBySeverity: { type: GraphQLBoolean }
-            },
             resolve: (parent, args) => {
                 let sortedBugs = [...bugs]; // Create a copy of the bugs array to avoid modifying the original data
-                if (args.sortBySeverity) {
-                    sortedBugs.sort((a, b) => severityMap[b.severity] - severityMap[a.severity]); // Sort bugs by severity
-                }
+                sortedBugs.sort((a, b) => severityMap[b.severity] - severityMap[a.severity]);
                 return sortedBugs;
             }
         },
