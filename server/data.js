@@ -1,26 +1,26 @@
 const bugs = [
     {
         id: 0,
-        title: 'Root Escalation w/ React & Vite',
-        description: 'It can escalate to root access',
-        severity: 'Extreme',
+        title: 'Comments Not Showing',
+        description: 'Comments dont show on page',
+        severity: 'Medium',
         patched: false,
         vulnerableTech: [
-            'React-DOM',
-            'Vite'
+            'Comment System',
+            'Users Page'
         ],
         comments: [
-            "great work"
+            "great find!"
         ]
     },
     {
         id: 1,
         title: 'XSS - Reflected',
-        description: 'Reflected XSS on github.com',
-        severity: 'Low',
+        description: 'Reflected XSS on main page',
+        severity: 'High',
         patched: false,
         vulnerableTech: [
-            'Github'
+            'All Components'
         ],
         comments: [
             "nice job",
