@@ -27,7 +27,7 @@ https://github.com/miranamer/Feromone/assets/91673777/3a6f1802-997e-44df-9718-bf
 
 <h1>What Is Feromone?</h1>
 <p>Feromone is a full stack bug tracking application written in TypeScript with React for the front-end and styled with Tailwind CSS and Chakra UI. The back-end uses GraphQL w/ Apollo Client and MongoDB for the DB. Feromone allows
-you to track bugs in your applications/projects based on thier severity.</p>
+you to track bugs in your applications/projects based on their severity.</p>
 
 <h1>Why The Name Feromone?</h1>
 <p>Well, <i>Pheromones</i> are actually chemicals released by organisms (Humans, Ants, Bees, etc...) and have an effect on nearby organisms. As pheromones are used by Ant species to <i>track</i> each other, 
