@@ -1,5 +1,6 @@
 const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLEnumType, GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLSchema } = require('graphql');
 const { bugs } = require('../data'); // Update the import path as needed
+const BugModel = require('../models/BugModel.ts');
 
 let bugCounter = bugs.length
 
@@ -435,6 +436,6 @@ const MutationMongo = new GraphQLObjectType({
 });
 
 module.exports = new GraphQLSchema({
-    query: RootQuery,
-    mutation: Mutation
+    query: RootQueryMongo,
+    mutation: MutationMongo
 });
